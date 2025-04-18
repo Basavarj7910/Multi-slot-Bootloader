@@ -5,12 +5,26 @@
 
 #define DELAY_CYCLES  16000000
 #define REQ_COUNT 1
-static uint32_t curr_tick = 0;
+
+#define enable_interrupt() do { __asm volatile("mov r0,#0"); __asm volatile("msr PRIMASK,r0");}while(0);
+#define disable_interrupt() do { __asm volatile("mov r0,#1"); __asm volatile("msr PRIMASK,r0");}while(0);
+
+volatile uint32_t curr_tick;
+volatile uint32_t curr_tick_cp;
 
 uint32_t get_ccount()
 {
-    return curr_tick;
+    disable_interrupt();
+    curr_tick_cp = curr_tick;
+    enable_interrupt();
+    return curr_tick_cp;
 }
+
+void increment()
+{
+    curr_tick += REQ_COUNT;
+}
+
 
 void init_systick()
 {
@@ -28,12 +42,13 @@ void init_systick()
 
 void SysTick_Handler() 
 {
-    curr_tick++;
-//    printf("hello every one \r\n");
+    increment();
 }
 
 void delay(uint32_t delay) 
 {
     uint32_t wait = get_ccount();
+    if (delay < DELAY_CYCLES)
+         delay++;
     while((get_ccount() - wait) < delay);
 }

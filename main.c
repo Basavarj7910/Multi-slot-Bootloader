@@ -11,7 +11,7 @@ int main()
     init_systick();
     while(1) {
         printf("hello world \r\n");
-        delay(10); 
+        delay(3); 
     }
     return 0;
 }
