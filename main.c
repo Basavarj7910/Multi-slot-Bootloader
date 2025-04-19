@@ -52,10 +52,7 @@ int main()
     //buttton_init();
    shift_default_appl(); 
     while(1) {
-        printf("hello world \r\n");
-        delay(3); 
-        printf("hi every one\r\n");
-        delay(1); 
+
     }
     return 0;
 }
