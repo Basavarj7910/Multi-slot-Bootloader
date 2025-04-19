@@ -28,16 +28,16 @@ void increment()
 
 void init_systick()
 {
-  /* initializing max count valu to the counter */
-  SYST->RVR = (DELAY_CYCLES - 1);
-  /* initializing zero to the current value register*/
-  SYST->CVR = 0x00;
-  /* enable the internal clock source */
-  SYST->CSR |= ( 1 << 2);
-  /* enable the interrupt */
-  SYST->CSR |= ( 1 << 1);
-  /* enable the systick timer */
-  SYST->CSR |= ( 1 << 0);
+    /* initializing max count valu to the counter */
+    SYST->RVR = (DELAY_CYCLES - 1);
+    /* initializing zero to the current value register*/
+    SYST->CVR = 0x00;
+    /* enable the internal clock source */
+    SYST->CSR |= ( 1 << 2);
+    /* enable the interrupt */
+    SYST->CSR |= ( 1 << 1);
+    /* enable the systick timer */
+    SYST->CSR |= ( 1 << 0);
 }
 
 void SysTick_Handler() 
@@ -49,6 +49,6 @@ void delay(uint32_t delay)
 {
     uint32_t wait = get_ccount();
     if (delay < DELAY_CYCLES)
-         delay++;
+        delay++;
     while((get_ccount() - wait) < delay);
 }

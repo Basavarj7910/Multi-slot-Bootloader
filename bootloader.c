@@ -16,7 +16,7 @@ extern char _ebss;
         	
 extern int main();
 extern void SysTick_Handler();
-extern void EXTI0_IRQHandler();
+//extern void EXTI0_IRQHandler();
 
 
 void Reset_Handler(void);
@@ -34,7 +34,7 @@ void PVD_IRQHandler 				(void) __attribute__ ((weak, alias("Default_Handler")));
 void TAMP_STAMP_IRQHandler 			(void) __attribute__ ((weak, alias("Default_Handler")));      
 void RTC_WKUP_IRQHandler 			(void) __attribute__ ((weak, alias("Default_Handler")));                               
 void RCC_IRQHandler 				(void) __attribute__ ((weak, alias("Default_Handler")));             
-//void EXTI0_IRQHandler 				(void) __attribute__ ((weak, alias("Default_Handler")));           
+void EXTI0_IRQHandler 				(void) __attribute__ ((weak, alias("Default_Handler")));           
 void EXTI1_IRQHandler 				(void) __attribute__ ((weak, alias("Default_Handler")));           
 void EXTI2_IRQHandler 				(void) __attribute__ ((weak, alias("Default_Handler")));           
 void EXTI3_IRQHandler 				(void) __attribute__ ((weak, alias("Default_Handler")));           

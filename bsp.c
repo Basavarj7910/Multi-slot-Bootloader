@@ -39,11 +39,11 @@ void buttton_init() {
     IRQ_en(6, 10, INT_SET);
 }
 
-void EXTI0_IRQHandler()
-{
-    gpio_toggle_pin(GPIOD, 12); 
-    EXTI->EXTI_PR |= (1 << 0);
-}
+//void EXTI0_IRQHandler()
+//{
+//    gpio_toggle_pin(GPIOD, 12); 
+//    EXTI->EXTI_PR |= (1 << 0);
+//}
     
 
 
