@@ -3,8 +3,28 @@
 #include "delay.h"
 #include "float_point.h"
 #include "bsp.h"
-#define APPL1 0x08008000U
+#define APPL1 0x0800C000U
 typedef void(*appl)(void);
+
+struct common_apis_struct {
+    void (*uart_init)(void);
+    void (*init_systick)(void);
+    void (*enable_fpu)(void);
+    void (*init_led)(void);
+    void (*buttton_init)(void);
+    void (*printf)(char *);
+    void (*delay)(uint32_t);
+};
+
+struct common_apis_struct __attribute__((section(".common_apis"))) common_apis = {
+    uart_init,
+    init_systick,
+    enable_fpu,
+    init_led,
+    buttton_init,
+    printf,
+    delay,
+};
 
 void shift_default_appl()
 {
