@@ -1,6 +1,7 @@
 #include "stm32f4xx.h"
 #include "delay.h"
 #include <stdint.h>
+#include <stdbool.h>
 #include "uart.h"
 
 #define DELAY_CYCLES  16000000
@@ -11,6 +12,8 @@
 
 volatile uint32_t curr_tick;
 volatile uint32_t curr_tick_cp;
+
+extern volatile bool button_press;
 
 uint32_t get_ccount()
 {
@@ -50,5 +53,8 @@ void delay(uint32_t delay)
     uint32_t wait = get_ccount();
     if (delay < DELAY_CYCLES)
         delay++;
-    while((get_ccount() - wait) < delay);
+    while((get_ccount() - wait) < delay) {
+       if(button_press) 
+           break;
+    }
 }
