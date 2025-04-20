@@ -6,27 +6,27 @@
 
 typedef struct
 {
-  uint8_t pin_num;           /* <pin number of port posible value from @GPIO pin numbers*/
-  uint8_t mode;              /* mode of gpio pin posible value from @MODE OF GPIO   */
-  uint8_t out_speed;        /* speed of gpio pin posible value from @SPEED OF GPIO */
-  uint8_t out_type;         /* output type of gpio pin posible value from @Different output types */
-  uint8_t pull_up_down;        /* pull_up or pull down conifigeration for gpio posible value from @push pull of gpio */
-  uint8_t alt_fun;          /* alternate function of pin posible alternate functions @ALT_FUNCTIONS OF GPIO*/
+    uint8_t pin_num;           /* <pin number of port posible value from @GPIO pin numbers*/
+    uint8_t mode;              /* mode of gpio pin posible value from @MODE OF GPIO   */
+    uint8_t out_speed;        /* speed of gpio pin posible value from @SPEED OF GPIO */
+    uint8_t out_type;         /* output type of gpio pin posible value from @Different output types */
+    uint8_t pull_up_down;        /* pull_up or pull down conifigeration for gpio posible value from @push pull of gpio */
+    uint8_t alt_fun;          /* alternate function of pin posible alternate functions @ALT_FUNCTIONS OF GPIO*/
 }gpio_conf_t;
 
 /*
-   *GPIO HANDLER
-*/
+ *GPIO HANDLER
+ */
 
 typedef struct 
 {
-  GPIO_RegDef_t *pGPIOX;      /* base adress of port */
-  gpio_conf_t  gpio_conf;     /* configeration values for pin */
+    GPIO_RegDef_t *pGPIOX;      /* base adress of port */
+    gpio_conf_t  gpio_conf;     /* configeration values for pin */
 }GPIO_handle_t;
 
 /*
-   *Different mode of the gpio
-*/
+ *Different mode of the gpio
+ */
 
 typedef enum
 {
@@ -40,8 +40,8 @@ typedef enum
 }GPIO_MODE_t;
 
 /* 
-   *PUSH PULL Configuartion 
-*/
+ *PUSH PULL Configuartion 
+ */
 
 typedef enum
 {
@@ -52,8 +52,8 @@ typedef enum
 } push_pull_t;
 
 /* 
-   *Output types of gpio
-*/
+ *Output types of gpio
+ */
 
 typedef enum
 {
@@ -62,8 +62,8 @@ typedef enum
 } output_type_t;
 
 /*
-   *Different Speed of GPIO
-*/
+ *Different Speed of GPIO
+ */
 
 typedef enum
 {
@@ -74,8 +74,8 @@ typedef enum
 } out_type_t;
 
 /*
-   *pin numbers of gpio
-*/
+ *pin numbers of gpio
+ */
 typedef enum
 {
     GPIO_NUM0 = 0,

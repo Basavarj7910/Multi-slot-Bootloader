@@ -9,7 +9,7 @@ GPIO_handle_t button;
 volatile bool button_press = false;
 void init_led()
 {
-    
+
     gpio_clk_ctrl(GPIOD, ENABLE);
     led.pGPIOX = GPIOD;
     led.gpio_conf.pin_num = 12;
@@ -45,6 +45,6 @@ void EXTI0_IRQHandler()
     button_press = true;
     EXTI->EXTI_PR |= (1 << 0);
 }
-    
+
 
 

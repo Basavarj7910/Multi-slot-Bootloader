@@ -46,17 +46,17 @@ void gpio_clk_ctrl(GPIO_RegDef_t *gpiox, uint8_t val) {
 }
 
 void IRQ_en(uint8_t irq_num, uint8_t priority, uint8_t set_clear) {
- uint8_t ind = irq_num / 32;
- uint8_t rem = irq_num % 32;
- if (set_clear == INT_SET) {
-    NVIC->NVIC_ISER[ind] |= (1 << rem);
- } else if( set_clear == INT_CLEAR) {
-    NVIC->NVIC_ICER[ind] |= (1 << rem);
- }
- uint8_t int_ind = irq_num/4;
- uint8_t int_rem = irq_num %4;
- NVIC->NVIC_IPR[int_ind] &= ~(0xff <<(8 * int_rem));
- NVIC->NVIC_IPR[int_ind] |= (priority << (8 * int_rem));
+    uint8_t ind = irq_num / 32;
+    uint8_t rem = irq_num % 32;
+    if (set_clear == INT_SET) {
+        NVIC->NVIC_ISER[ind] |= (1 << rem);
+    } else if( set_clear == INT_CLEAR) {
+        NVIC->NVIC_ICER[ind] |= (1 << rem);
+    }
+    uint8_t int_ind = irq_num/4;
+    uint8_t int_rem = irq_num %4;
+    NVIC->NVIC_IPR[int_ind] &= ~(0xff <<(8 * int_rem));
+    NVIC->NVIC_IPR[int_ind] |= (priority << (8 * int_rem));
 
 }
 
@@ -83,34 +83,34 @@ void gpio_init(GPIO_handle_t gpiox) {
         uint8_t pin_num = gpiox.gpio_conf.pin_num / 4;
         uint8_t pin_ind = gpiox.gpio_conf.pin_num % 4;
         if (gpiox.pGPIOX == GPIOA) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOB) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x01 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x01 << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOC) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x02 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x02 << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOD) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x03 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x03 << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOE) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x04 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x04 << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOF) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x05 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x05 << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOG) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x06 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x06 << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOH) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x07 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x07 << (4 * pin_ind));
         } else if (gpiox.pGPIOX == GPIOI) {
-        SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
-        SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x08 << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] &= ~(0xff << (4 * pin_ind));
+            SYSCFG->SYSCFG_EXTICR[pin_num] |= (0x08 << (4 * pin_ind));
         }
         //enablibg interuupt  mask register for the pin
-         EXTI->EXTI_IMR |= (1 << (gpiox.gpio_conf.pin_num));
+        EXTI->EXTI_IMR |= (1 << (gpiox.gpio_conf.pin_num));
     }
     // setting the output type
     gpiox.pGPIOX->OTYPER &= ~(0x1 << gpiox.gpio_conf.pin_num);
@@ -135,26 +135,26 @@ void gpio_init(GPIO_handle_t gpiox) {
 void gpio_dinit(GPIO_RegDef_t * gpiox)
 {
 
-        if (gpiox == GPIOA) {
-            RCC->AHB1RSTR |= (1 << 0);
-        } else if (gpiox == GPIOB) {
-            RCC->AHB1RSTR |= (1 << 1);
-        } else if (gpiox == GPIOC) {
-            RCC->AHB1RSTR |= (1 << 2);
-        } else if (gpiox == GPIOD) {
-            RCC->AHB1RSTR |= (1 << 3);
-        } else if (gpiox == GPIOE) {
-            RCC->AHB1RSTR |= (1 << 4);
-        } else if (gpiox == GPIOF) {
-            RCC->AHB1RSTR |= (1 << 5);
-        } else if (gpiox == GPIOG) {
-            RCC->AHB1RSTR |= (1 << 6);
-        } else if (gpiox == GPIOH) {
-            RCC->AHB1RSTR |= (1 << 7);
-        } else if (gpiox == GPIOI) {
-            RCC->AHB1RSTR |= (1 << 8);
-        }
-   
+    if (gpiox == GPIOA) {
+        RCC->AHB1RSTR |= (1 << 0);
+    } else if (gpiox == GPIOB) {
+        RCC->AHB1RSTR |= (1 << 1);
+    } else if (gpiox == GPIOC) {
+        RCC->AHB1RSTR |= (1 << 2);
+    } else if (gpiox == GPIOD) {
+        RCC->AHB1RSTR |= (1 << 3);
+    } else if (gpiox == GPIOE) {
+        RCC->AHB1RSTR |= (1 << 4);
+    } else if (gpiox == GPIOF) {
+        RCC->AHB1RSTR |= (1 << 5);
+    } else if (gpiox == GPIOG) {
+        RCC->AHB1RSTR |= (1 << 6);
+    } else if (gpiox == GPIOH) {
+        RCC->AHB1RSTR |= (1 << 7);
+    } else if (gpiox == GPIOI) {
+        RCC->AHB1RSTR |= (1 << 8);
+    }
+
 }
 
 uint8_t gpio_read_pin(GPIO_RegDef_t * gpiox, uint8_t pin) {

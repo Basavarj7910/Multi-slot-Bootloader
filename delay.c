@@ -54,7 +54,7 @@ void delay(uint32_t delay)
     if (delay < DELAY_CYCLES)
         delay++;
     while((get_ccount() - wait) < delay) {
-       if(button_press) 
-           break;
+        if(button_press) 
+            break;
     }
 }

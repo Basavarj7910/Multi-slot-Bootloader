@@ -26,33 +26,33 @@ void set_baudrate(uint32_t peri_clk, uint32_t baudrate)
 
 void uart_init()
 {
-   /* enable the USART2 peripheral clk */
-   USART2_PCLK_EN();         
-   /* enable the GPIOA peripheral clk */
-   GPIOA_PCLK_EN();                
-   /* selecting gpio mode as alternate function for GPIO2A */
-   GPIOA->MODER &= ~(3 << 4); 
-   GPIOA->MODER |= (1 << 5);       
-   /* selecting gpio mode as alternate function for GPIO3A */
-   GPIOA->MODER &= ~(3 << 6); 
-   GPIOA->MODER |= (1 << 7);       
-   /* selcting AF7(UART) as alternate function for UPIO2A */
-   GPIOA->AFR[0] &= ~(0xf << 8);   
-   GPIOA->AFR[0] |= (0x07 << 8);   
-   /* selcting AF7(UART) as alternate function for UPIO3A */
-   GPIOA->AFR[0] &= ~(0xf << 12);   
-   GPIOA->AFR[0] |= (0x07 << 12);   
-   /* selcting baudarate  */
-   set_baudrate(PERI_CLK, BAUDRATE);
-   /* enable the uart_tx */
-   USART2->USART_CR1 |= TX_EN;
-   /* enable the uart_rx_interrupt */
-   USART2->USART_CR1 |= RXNE_IN_EN;
-   NVIC->NVIC_ISER[1] |= ( 1 << 6);
-   /* enable the uart_rx */
-   USART2->USART_CR1 |= RX_EN;
-   /* enable the uart2 */
-   USART2->USART_CR1 |= UE_EN;
+    /* enable the USART2 peripheral clk */
+    USART2_PCLK_EN();         
+    /* enable the GPIOA peripheral clk */
+    GPIOA_PCLK_EN();                
+    /* selecting gpio mode as alternate function for GPIO2A */
+    GPIOA->MODER &= ~(3 << 4); 
+    GPIOA->MODER |= (1 << 5);       
+    /* selecting gpio mode as alternate function for GPIO3A */
+    GPIOA->MODER &= ~(3 << 6); 
+    GPIOA->MODER |= (1 << 7);       
+    /* selcting AF7(UART) as alternate function for UPIO2A */
+    GPIOA->AFR[0] &= ~(0xf << 8);   
+    GPIOA->AFR[0] |= (0x07 << 8);   
+    /* selcting AF7(UART) as alternate function for UPIO3A */
+    GPIOA->AFR[0] &= ~(0xf << 12);   
+    GPIOA->AFR[0] |= (0x07 << 12);   
+    /* selcting baudarate  */
+    set_baudrate(PERI_CLK, BAUDRATE);
+    /* enable the uart_tx */
+    USART2->USART_CR1 |= TX_EN;
+    /* enable the uart_rx_interrupt */
+    USART2->USART_CR1 |= RXNE_IN_EN;
+    NVIC->NVIC_ISER[1] |= ( 1 << 6);
+    /* enable the uart_rx */
+    USART2->USART_CR1 |= RX_EN;
+    /* enable the uart2 */
+    USART2->USART_CR1 |= UE_EN;
 }
 
 void printf(char *data)
@@ -87,7 +87,9 @@ void USART2_IRQHandler() {
                     while (!(USART2->USART_SR & (1 << 6))); // Wait for TXE
                     USART2->USART_DR = ret[i];
                 }
-                printf("Press key 1 or 2 to run respective applications\r\n");
+                printf("Available Commands:\r\n");
+                printf("1       ==> Run App 1\r\n");
+                printf("2       ==> Factory App 2\r\n");
             }
         }
     }
