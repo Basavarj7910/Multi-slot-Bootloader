@@ -1,11 +1,12 @@
 #include <stdint.h>
+#include <stdbool.h>
 #include "bsp.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_gpio.h"
 
 GPIO_handle_t led;
 GPIO_handle_t button;
-
+volatile bool button_press = false;
 void init_led()
 {
     
@@ -39,11 +40,11 @@ void buttton_init() {
     IRQ_en(6, 10, INT_SET);
 }
 
-//void EXTI0_IRQHandler()
-//{
-//    gpio_toggle_pin(GPIOD, 12); 
-//    EXTI->EXTI_PR |= (1 << 0);
-//}
+void EXTI0_IRQHandler()
+{
+    button_press = true;
+    EXTI->EXTI_PR |= (1 << 0);
+}
     
 
 

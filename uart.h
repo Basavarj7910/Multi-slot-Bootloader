@@ -3,4 +3,6 @@
 
 void uart_init();
 void printf(char *data);
+void shift_appl1();
+void shift_appl2();
 #endif

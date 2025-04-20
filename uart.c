@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 #include "stm32f4xx.h"
 #include "uart.h"
 
@@ -9,6 +10,8 @@
 #define RX_EN    (1 << 2)
 #define RXNE_IN_EN    (1 << 5)
 
+extern volatile bool button_press;
+volatile uint8_t key_value;
 
 uint32_t calculate_baudrate(uint32_t peri_clk, uint32_t baudrate) 
 {
@@ -62,13 +65,30 @@ void printf(char *data)
 
 void USART2_IRQHandler() {
     if (USART2->USART_SR & ( 1 << 5)) {
-        uint8_t data = USART2->USART_DR;
-        if (data == 49) {
-            printf("key pressed is 1\r\n");
-        } else if (data == 50) {
-            printf("key pressed is 2\r\n");
-        } else {
-            printf("other key is pressed\r\n");
+        if (button_press) {
+            uint8_t data = USART2->USART_DR;
+            if (data == 49) {
+                uint8_t ret[3] = {data,'\r','\n'};
+                for (int i =0;i<3;i++) {
+                    while (!(USART2->USART_SR & (1 << 6))); // Wait for TXE
+                    USART2->USART_DR = ret[i];
+                }
+                key_value = 1;
+            } else if (data == 50) {
+                uint8_t ret[3] = {data,'\r','\n'};
+                for (int i =0;i<3;i++) {
+                    while (!(USART2->USART_SR & (1 << 6))); // Wait for TXE
+                    USART2->USART_DR = ret[i];
+                }
+                key_value = 2;
+            } else {
+                uint8_t ret[3] = {data,'\r','\n'};
+                for (int i =0;i<3;i++) {
+                    while (!(USART2->USART_SR & (1 << 6))); // Wait for TXE
+                    USART2->USART_DR = ret[i];
+                }
+                printf("Press key 1 or 2 to run respective applications\r\n");
+            }
         }
     }
 }
